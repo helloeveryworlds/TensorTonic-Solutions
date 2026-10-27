@@ -1,10 +1,7 @@
-import numpy as np
-from typing import List, Dict
-
 class SimpleTokenizer:
     def __init__(self):
-        self.word_to_id: Dict[str, int] = {}
-        self.id_to_word: Dict[int, str] = {}
+        self.word_to_id = {}
+        self.id_to_word = {}
         self.vocab_size = 0
         self.pad_token = "<PAD>"
         self.unk_token = "<UNK>"
@@ -31,14 +28,12 @@ class SimpleTokenizer:
             self.id_to_word[idx] = word
 
         self.vocab_size = len(self.word_to_id)
-        
-    def encode(self, text: str) -> list[int]:
-        """
-        Returns token IDs for the input text.
-        """
+
+    def encode(self, text: str) -> List[int]:
         words = text.lower().split()
         unk_id = self.word_to_id[self.unk_token]
         return [self.word_to_id.get(word, unk_id) for word in words]
+
 
     def decode(self, ids: list[int]) -> str:
         """
